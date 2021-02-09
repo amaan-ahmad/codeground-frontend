@@ -21,6 +21,7 @@ export default function CodeEditor() {
     } else if (lang === "java") {
       setEditorValue(javaTemplate);
     }
+    // eslint-disable-next-line
   }, [lang]);
 
   const handleRun = () => {
