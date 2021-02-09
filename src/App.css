@@ -1,5 +1,6 @@
 @import "codemirror/lib/codemirror.css";
 @import "codemirror/theme/material.css";
+@import "codemirror/theme/cobalt.css";
 /* 
 .App {
   text-align: center;
@@ -21,20 +22,55 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 1em;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.editor {
-  min-width: 40vw;
+.flex {
+  display: flex;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+
+.editor {
+  width: 100%;
+  /* min-height: 80%; */
+}
+
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.output-panel {
+  width: 100%;
+  resize: none;
+}
+.stdin {
+  width: 100%;
+}
+
+.output-panel,
+.stdin,
+.editor {
+  font-size: 1.5rem;
+}
+
+.btn-run {
+  padding: 1em 2em;
+  margin: auto;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
