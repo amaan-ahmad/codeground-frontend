@@ -24,7 +24,7 @@
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   color: white;
-  padding: 1em;
+  /* padding: 0.1em; */
 }
 
 .App-link {
@@ -33,6 +33,9 @@
 
 .flex {
   display: flex;
+}
+.flex-1 {
+  flex: 1;
 }
 
 .flex-row {
@@ -50,11 +53,17 @@
 .editor-panel {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  flex: 1;
+}
+
+.textarea-label {
+  padding: 0.4rem;
+  background: black;
+  color: white;
 }
 
 .output-panel {
-  width: 100%;
+  flex: 1;
   resize: none;
 }
 .stdin {
@@ -70,7 +79,38 @@
 .btn-run {
   padding: 1em 2em;
   margin: auto;
+  border: 1px solid cyan;
+  background-color: transparent;
+  color: white;
+  font-size: medium;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
+
+.btn-run:hover {
+  background-color: cyan;
+  color: black;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  width: 100%;
+  z-index: 5;
+  height: 100%;
+}
+
+.overlay > p {
+  margin: auto;
+  font-size: xx-large;
+  font-weight: 600;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

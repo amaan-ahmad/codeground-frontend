@@ -11,6 +11,7 @@ export default function CodeEditor() {
   const [stdin, setStdin] = useState("");
   const [lang, setLang] = useState("cpp");
   const [isEdited, setIsEdited] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     if (isEdited) {
@@ -25,6 +26,7 @@ export default function CodeEditor() {
   }, [lang]);
 
   const handleRun = () => {
+    setIsRunning(true);
     axios
       .post("https://codeground-backend.herokuapp.com/api/exec", {
         language: lang,
@@ -35,8 +37,12 @@ export default function CodeEditor() {
       .then((res) => {
         console.log(res.data);
         setOutput(res.data.output);
+        setIsRunning(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setIsRunning(false);
+      });
   };
 
   const handleLangChange = (e) => {
@@ -45,6 +51,11 @@ export default function CodeEditor() {
   };
   return (
     <>
+      {isRunning && (
+        <div className="overlay">
+          <p>Running....</p>
+        </div>
+      )}
       <div className="editor-panel">
         <select name="languages" onChange={handleLangChange} value={lang}>
           <option value="cpp">C++</option>
@@ -70,23 +81,29 @@ export default function CodeEditor() {
           }}
         />
         <div className="flex flex-row">
-          <CodeMirror
-            value={stdin}
-            options={{
-              mode: "text",
-              theme: "material",
-            }}
-            className="stdin"
-            onBeforeChange={(editor, data, value) => {
-              setStdin(value);
-            }}
-            onChange={(editor, data, value) => {
-              setStdin(value);
-            }}
-          />
-          <textarea value={output} readOnly={true} className="output-panel" />
+          <div className="flex flex-col flex-1">
+            <span className="textarea-label">Input:</span>
+            <CodeMirror
+              value={stdin}
+              options={{
+                mode: "text",
+                theme: "material",
+              }}
+              className="stdin"
+              onBeforeChange={(editor, data, value) => {
+                setStdin(value);
+              }}
+              onChange={(editor, data, value) => {
+                setStdin(value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col flex-1">
+            <span className="textarea-label">Output:</span>
+            <textarea value={output} readOnly={true} className="output-panel" />
+          </div>
         </div>
-        <button className="btn-run" onClick={handleRun}>
+        <button className="btn-run" disabled={isRunning} onClick={handleRun}>
           Run
         </button>
       </div>
