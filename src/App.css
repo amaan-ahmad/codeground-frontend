@@ -1,6 +1,9 @@
+@import "codemirror/lib/codemirror.css";
+@import "codemirror/theme/material.css";
+/* 
 .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -26,6 +29,10 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.editor {
+  min-width: 40vw;
 }
 
 @keyframes App-logo-spin {
