@@ -10,7 +10,7 @@ export default function CodeEditor() {
   const [lang, setLang] = useState("cpp");
   const handleRun = () => {
     axios
-      .post("http://localhost:5000/api/exec", {
+      .post("https://codeground-backend.herokuapp.com/api/exec", {
         language: lang,
         versionIndex: "3",
         script: editorValue,
